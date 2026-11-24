@@ -1,3 +1,9 @@
-a.
-b.
-c.
+a.Since a quadtree always splits a cell at itsexact midpoint, if we place points in the corners of the area(and other locations that cannot get to through havles splitting), it would need to traverse the whole map to getto that point. 
+So the point the point (0, 0) takes O(n) time, because it overlaps the NW cell at every level and must walk the entire chain, even though it returns no results.
+A query with a point. 0.8,0.2 finishs in constant  time as it can reach there in a small number of iterations. 
+b.If the same point is inserted repeatedly, every copy has identical coordinates, so every copy falls into the same child at every split.
+Once a leaf holds 9 copies, it splits, but all 9 copies move into the same child, which is still over the limit of 8 and must split again.
+Thus it creates a never ending loop.
+c.Quadtrees are built for local changes. Moving one object is cheap: remove it and reinsert it, at a cost proportional to the tree's depth. 
+Transforming every object in the scene means updating all n objects one by one, which is as expensive as a full rebuild.
+Therefore, quadtrees suit mostly static scenes where only a certain amount of objects move each frame and queries are local, but they are a poor fit for dense updates where the whole scene moves or transforms at once.
